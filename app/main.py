@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 settings = Settings()
 
 app = FastAPI()
+client = genai.Client(api_key=settings.gemini_api_key)
 
 @app.post('/summarize') # multipart/form-data
 async def summarize(
@@ -20,7 +21,6 @@ async def summarize(
                 response_type: Annotated[str, Form()],
                 user_rules: Annotated[list[str], Form()]):
 
-    client = genai.Client(api_key=settings.gemini_api_key)
     model = 'gemini-2.5-flash'
 
     text = await extract_text(file)
