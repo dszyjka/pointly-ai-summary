@@ -6,12 +6,9 @@ from database.database import get_db
 from constants.labels import ResponseType
 from services import summarize
 from sqlalchemy.ext.asyncio import AsyncSession
-from google import genai
-from config import settings
 
 
 router = APIRouter()
-
 
 @router.post('/summarize') # multipart/form-data
 async def post_summarize(
@@ -22,4 +19,4 @@ async def post_summarize(
                 db: AsyncSession = Depends(get_db),
                     ):
 
-    return StreamingResponse(await summarize.run(file, user_id, response_type, user_rules, db), media_type='text/plain')
+    return StreamingResponse(summarize.run(file, user_id, response_type, user_rules, db), media_type='text/plain')
