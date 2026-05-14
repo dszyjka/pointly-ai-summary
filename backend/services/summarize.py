@@ -8,7 +8,7 @@ from backend.database.database import save_to_db
 client = genai.Client(api_key=settings.gemini_api_key)
 
 async def run(file, user_id, response_type, user_rules, db):
-    model = 'gemini-2.0-flash'
+    model = 'gemini-2.5-flash'
 
     text = await extract_text(file)
 

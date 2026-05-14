@@ -23,5 +23,7 @@ async def post_summarize(
                 user_id: str = Depends(get_user_from_header),
                 db: AsyncSession = Depends(get_db),
                     ):
+    
+    generator = await summarize.run(file, user_id, response_type, user_rules, db)
 
-    return StreamingResponse(summarize.run(file, user_id, response_type, user_rules, db), media_type='text/plain')
+    return StreamingResponse(generator, media_type='text/plain')
